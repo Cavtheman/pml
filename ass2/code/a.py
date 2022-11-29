@@ -2,22 +2,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def k(x, y, gamma):
-    return np.exp(-gamma * np.linalg.norm(x - y))
+    return np.exp(-gamma * np.linalg.norm(x - y)**2)
 
-S = np.linspace(0.0, 1.0, 101)
-K = np.fromfunction(np.vectorize (lambda i, j: k(S[int(i)], S[int(j)], 0.5)), (101, 101))
+def wiener (x, y):
+    return min (x,y)
+
+N = 101
+gamma = 10
+
+S = np.linspace(-1.0, 1.0, N)
+for i in range (5):
+    K = np.fromfunction(np.vectorize (lambda i, j: k(S[int(i)], S[int(j)], gamma)), (N, N))
+    Y = np.random.multivariate_normal(np.zeros(N), K)
+    plt.plot(S, Y)
+
+plt.title ("Gaussian Process")
+plt.show()
 
 
-# Y = np.random.multivariate_normal(np.zeros(101), K)
+for i in range (5):
+    K = np.fromfunction(np.vectorize (lambda i, j: wiener(S[int(i)], S[int(j)])), (N, N))
+    Y = np.random.multivariate_normal(np.zeros(N), K)
+    plt.plot(S, Y)
 
-# plt.plot(S, Y)
-# plt.show()
-
-
-# def gkern(l=5, sig=1.):
-#     ax = np.linspace(-(l - 1) / 2., (l - 1) / 2., l)
-#     gauss = np.exp(-0.5 * np.square(ax) / np.square(sig))
-#     kernel = np.outer(gauss, gauss)
-#     return kernel / np.sum(kernel)
-
-# print(gkern(100))
+plt.title ("Wiener Process")
+plt.show()
