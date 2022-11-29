@@ -1,1 +1,16 @@
-Write stuff here.
+We want to show that, with the following definitions, the Wiener Process is not a random Process, according to Kolmogorov's Consistency Theorem.
+\begin{align*}
+  &f_0=0, x_0=0 \\
+  &f_{i+1}=f_i+W_i, W_i \sim N\left(0, \sqrt{x_{i+1}-x_i}\right)
+\end{align*}
+We use that definition of $K = ADA^T$ from the slides, with all that follows. As such, we have a definition for each index $K_{ij}$, with the modified definition from above:
+\begin{align*}
+  K_{ij} &= \sum_{I=1}^i \sqrt{x_I - x_{I-1}} \mathbb{I}\{I\leq j\} \\
+  &= \sum_{I=1}^{\text{min}\{i,j\}}\sqrt{x_I - x_{I-1}} \\
+  &\centernot = x_{\text{min}\{i,j\}}
+\end{align*}
+We see that we cannot do the same reduction as in the slides, $\sum_{I=1}^{\text{min}\{i,j\}}(x_I - x_{I-1}) = x_{\text{min}\{i,j\}}$. Because the expression cannot be reduced to something that does not depend on all previous values, we see that it is not possible for a subset $T$ to have the property that:
+\begin{align*}
+  p(f_T|T) = \int p(f_T,f_C|S) \text{d}f_C
+\end{align*}
+As such, we have proven that this modified Wiener Process is not a random process.
