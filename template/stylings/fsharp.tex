@@ -1,0 +1,47 @@
+\usepackage{color}
+\usepackage{listings}
+\usepackage{upquote}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+
+
+\lstdefinelanguage{FSharp}%
+{morekeywords={let, new, match, with, rec, open, module, namespace, type, of, member, %
+and, for, while, true, false, in, do, begin, end, fun, function, return, yield, try, %
+mutable, if, then, else, cloud, async, static, use, abstract, interface, inherit, finally },
+  otherkeywords={ let!, return!, do!, yield!, use!, var, from, select, where, order, by },
+  keywordstyle=\color{bluekeywords},
+  sensitive=true,
+  basicstyle=\ttfamily,
+	breaklines=true,
+  xleftmargin=\parindent,
+  aboveskip=\bigskipamount,
+	tabsize=4,
+  morecomment=[l][\color{greencomments}]{///},
+  morecomment=[l][\color{greencomments}]{//},
+  morecomment=[s][\color{greencomments}]{{(*}{*)}},
+  morestring=[b]",
+  showstringspaces=false,
+  literate={`}{\`}1,
+  stringstyle=\color{redstrings},
+}
+\lstset{
+  language=FSharp
+}
+
+%Brugseksempler:
+
+% Skriv koden direkte i LaTeX
+% \begin{lstlisting}
+%   printfn "Hello World"
+% \end{lstlisting}
+
+% Viser en hel fil. Stien starter fra folderen som .tex filen ligger i
+% \lstinputlisting{path/to/my/file/my_file.fsx}
+
+% Viser linjerne 1-3
+% \lstinputlisting[firstline=1, lastline=3]{path/to/my/file/my_file.fsx}
+
+% Viser linjerne 1-3 og 5-6
+% \lstinputlisting[linerange=1-3, 5-6]{path/to/my/file/my_file.fsx}
