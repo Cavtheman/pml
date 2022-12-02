@@ -14,7 +14,7 @@ def special_kernel(X,Xprime, eta):
     K = (1+X@Xprime.T)**2 + a * np.multiply.outer(np.sin(2*np.pi*X.reshape(-1)+b),np.sin(2*np.pi*Xprime.reshape(-1)+b))
     return K
 
-#load and normalize Mauna Loa data 
+#load and normalize Mauna Loa data
 data = np.genfromtxt('co2_mm_mlo.csv', delimiter=',')
 #10 years of data for learning
 X = data[:120,2]-1958
@@ -32,7 +32,7 @@ def negLogLikelihood(params, kernel):
     eta = params[1:]
     # todo: calculate the negative loglikelihood (See section 6.3 in the lecture notes)
     return 0.0 # todo: return the negative loglikelihood
-    
+
 def optimize_params(ranges, kernel, Ngrid):
     opt_params = opt.brute(lambda params: negLogLikelihood(params, kernel), ranges, Ns=Ngrid, finish=None)
     noise_var = opt_params[0]
@@ -41,6 +41,7 @@ def optimize_params(ranges, kernel, Ngrid):
 
 # B) todo: implement the posterior distribution, i.e. the distribution of f^star
 def conditional(X, y, noise_var, eta, kernel):
+
     # todo: Write the function...
     # See eq. 66 in the lecture notes. Note that there is a small error: Instead of (S) it should be K(S)
     return mustar, Sigmastar # return mean and covariance matrix
