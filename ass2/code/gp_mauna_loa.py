@@ -41,9 +41,19 @@ def optimize_params(ranges, kernel, Ngrid):
 
 # B) todo: implement the posterior distribution, i.e. the distribution of f^star
 def conditional(X, y, noise_var, eta, kernel):
-
-    # todo: Write the function...
-    # See eq. 66 in the lecture notes. Note that there is a small error: Instead of (S) it should be K(S)
+    '''
+    mustar = k(x, x^star)^T * (K + sigma^2 * I)^-1 * y
+    Sigmastar = k(x^star, x^star) - k(x, x^star)^T * (K + sigma^2 * I)^-1 * k(x, x^star)
+    '''
+    X.shape = (-1, 1)
+    X_predict.shape = (-1, 1)
+    K = kernel(X, X, eta) + noise_var * np.eye(len(X))
+    Kstar = kernel(X, X_predict, eta)
+    Kstarstar = kernel(X_predict, X_predict, eta) + noise_var * np.eye(len(X_predict))
+    L = scipy.linalg.cholesky(K, lower=True)
+    alpha = scipy.linalg.solve_triangular(L.T, scipy.linalg.solve_triangular(L, y, lower=True))
+    mustar = Kstar.T @ alpha
+    Sigmastar = Kstarstar - Kstar.T @ scipy.linalg.solve(K, Kstar)
     return mustar, Sigmastar # return mean and covariance matrix
 
 # C) todo: adapt this
@@ -55,11 +65,12 @@ noise_var, eta = optimize_params(ranges, kernel, Ngrid)
 print("optimal params:", noise_var, eta)
 
 # B) todo: use the learned GP to predict on the observations at X_predict
-prediction_mean_gp, Sigma_gp = conditional('''TODO: Inset input ''')
+prediction_mean_gp, Sigma_gp = conditional(X, y, noise_var, eta, kernel)
+
 var_gp = np.diag(Sigma_gp) # We only need the diagonal term of the covariance matrix for the plots.
 
 #plotting code for your convenience
-plt.figure(dpi=400,figsize=(6,3))
+plt.figure(dpi=100,figsize=(6,3))
 plt.plot(X + 1958, y_raw, color='blue', label='training data')
 plt.plot(X_predict + 1958, y_predict, color='red', label='test data')
 yout_m =prediction_mean_gp*y_std + y_mean
@@ -71,3 +82,4 @@ plt.xlabel("year")
 plt.ylabel("co2(ppm)")
 plt.legend()
 plt.tight_layout()
+plt.show()
