@@ -3,10 +3,9 @@
 % Custom .sty that handles a lot of nice things
 % This includes importing a bunch of common packages
 \usepackage{arxiv}
-\usepackage{centernot}
 
 \title{
-  Assignment 2\\
+  Exam Project\\
   Probabilistic Machine Learning
 }
 
@@ -19,7 +18,8 @@
   \AND           % You can comment this line and the next three if you're not in a group
   Kasper Unn Weihe\\
   University of Copenhagen\\
-  \texttt{pxh755@alumni.ku.dk}
+  \texttt{pxh755@alumni.ku.dk}\\\\
+  All contributions are equal.
 }
 
 \renewcommand{\undertitle}{}
@@ -29,7 +29,7 @@
 % These ones are all stolen from the internet somewhere
 % python, fsharp, haskell
 %\input{stylings/fsharp}
-\input{stylings/python}
+%\input{stylings/python}
 %\input{stylings/haskell}
 % Write some code directly in latex
 %\begin{lstlisting}
@@ -57,14 +57,14 @@
 
 % For ease of organisation, keep separate sections in separate files.
 % This imports all latex code from latex/1.tex
-\section{Theory Exercise}
-\input{latex/1}
+\renewcommand{\thesection}{A}
 
-\section{Programming Exercise}
-\lstinputlisting{../code/a.py}
+\section{Density Modelling}
+\input{latex/a}
 
-\section{Programming Exercise}
-\lstinputlisting{../code/gp_mauna_loa.py}
+\section{Function Fitting}
+\input{latex/b}
+
 % keywords can be removed
 %\keywords{First keyword \and Second keyword \and More}
 
