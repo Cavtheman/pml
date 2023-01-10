@@ -1,5 +1,6 @@
 1mio-raw.csv
 ## Core latex/pdflatex auxiliary files:
+exam/data/*
 *.pth
 */__pycache__/
 ass4/data/*
