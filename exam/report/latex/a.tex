@@ -1,0 +1,24 @@
+The convolutional VAE is implemented in the file \texttt{convolutional\_vae.py} by extending the encoder and decoder of the original VAE with convolutional layers. The encoder portion of the network uses a series of convolutional layers (Conv2d) with kernel size 4, stride 2, and padding 1. These layers take in a single channel image and output 32, 64, and 128 channels respectively. Since the stride is 2, the output of each layer is half the size of the input. The output of these layers is then flattened and passed through a linear layer with 100 units to produce the encoded representation of the input image. This encoded representation is then passed through two linear layers to produce the mean and variance of the latent space, respectively.
+
+The decoder portion of the network takes in the latent space and passes it through a linear layer with 100 units to produce the decoder's input. This input is then passed through a linear layer with 12833 units, which reshapes the input to match the shape of the output from the encoder. The output is then passed through a series of transposed convolutional layers (ConvTranspose2d) with kernel size 4, stride 2, and padding 1, which take in 128, 64, and 32 channels respectively and output a single channel image. The output of the final layer is passed through a sigmoid activation function to produce the final output image.
+
+We expect that the quality of the model will be better than the original VAE since convolutional layers are usally more suited for image data and can capture spatial hierarchies and patterns in the data that linear layers are not able to.
+
+The parameters of the network were estimated using the Adam optimizer and the ELBO loss. ELBO is the sum of two terms: the reconstruction loss (BCE) and the KL-divergence. By minimizing this loss, the VAE is able to learn a good approximation of the true posterior, and generate realistic samples from the learned latent space. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
