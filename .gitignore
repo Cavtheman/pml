@@ -263,3 +263,5 @@ TSWLatexianTemp*
 FSharp.Core.dll
 *.exe
 *.dll
+
+!exam/report/images/*
