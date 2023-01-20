@@ -18,7 +18,7 @@ The algorithm as supplied uses a greedy approach that does not work at all to fi
 \label{fig:iter_naive}
 \end{figure}
 
-To fix these shortcomings, we first thought of going in the other direction from the supplied algorithm, and making ours such that it explores the function space better. The idea was that with sufficient exploration, we would hopefully find the global minimum, instead of just a local one. We did this by sampling $p = \texttt{argmax} \left( v(x^*), x^* \in X^*\right)$. This formulation would essentially only perform exploration, and as such find a much better function approximation very quickly. However, we realised that this formulation would often find the general area of the global minimum, but would never explore it without significantly more iterations. To fix this we ended up swapping between the two methods, every second step. The result is a very simple and elegant formulation that both explores the function space to try and find the global optimum, and explores the current best optimum, to improve that. More formally, we choose $p$ in the following way:
+To fix these shortcomings, we first thought of going in the other direction from the supplied algorithm, and making ours such that it explores the function space better. The idea was that with sufficient exploration, we would hopefully find the global minimum, instead of just a local one. We did this by sampling $p = \texttt{argmax} \left( v(x^*), x^* \in X^*\right)$. This formulation would essentially only perform exploration, and as such find a much better function approximation very quickly. However, we realised that this formulation would often find the general area of the global minimum, but would never explore it without significantly more iterations. To fix this we ended up swapping between the two methods, every second step. The result is a very simple and elegant formulation that both explores the function space to try and find the global optimum, and explores the current best optimum, to improve that. This formulation also allows for another hyperparameter, namely tuning how often it uses tries to optimise its current optimum, and how often it tries to explore the function space. More formally, we choose $p$ in the following way:
 
 \begin{align}
   p &=
@@ -51,8 +51,8 @@ To fix these shortcomings, we first thought of going in the other direction from
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.75\linewidth]{images/arviz_0.png}\\
-\includegraphics[width=0.75\linewidth]{images/arviz_1.png}
+\includegraphics[width=0.49\linewidth]{images/arviz_0.png}
+\includegraphics[width=0.49\linewidth]{images/arviz_1.png}
 \setlength{\belowcaptionskip}{-10pt}
 \caption{Arviz plots of the results.}
 \label{fig:arviz_new}
