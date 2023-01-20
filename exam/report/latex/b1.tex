@@ -32,7 +32,7 @@ We used Arviz to gauge the quality of our samples, which gave us the plots that 
 % #  0.9 |  0.252    |  0.179  |  351.0   |  404.0   |  1.01
 
 \begin{table}[h]
-\subfloat[Arviz results for the lengthscale parameter.]{
+\subfloat[Lengthscale parameter.]{
 \resizebox{0.5\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
@@ -42,7 +42,7 @@ target\_accept\_prob & mcse\_mean & mcse\_sd & ess\_bulk & ess\_tail & r\_hat \\
 0.9 & 0.009 & 0.006 & 367.0 & 426.0 & 1.00 \\ \hline
 \end{tabular}
 }}
-\subfloat[Arviz results for the variance parameter.]{
+\subfloat[Variance parameter.]{
 \resizebox{0.5\textwidth}{!}{
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
@@ -52,8 +52,11 @@ target\_accept\_prob & mcse\_mean & mcse\_sd & ess\_bulk & ess\_tail & r\_hat \\
 0.9 & 0.252 & 0.179 & 351.0 & 404.0 & 1.01 \\ \hline
 \end{tabular}
 }}
+\caption{Arviz results for the lengthscale and variance parameters.}
+\label{tab:arviz_new}
 \end{table}
 
+We did not see huge difference when adjusting the nunber of warmup samples, but we did see a slight improvement when increasing the target acceptance probability. The results of this can be seen in Table \ref{tab:arviz_new}. The effective bulk sample size and effective tail sample size increased along with the target acceptance probability. The Markov Chain Monte Carlo Standard Error (MCSE) also decreased, which is a good sign. MCSE refers to the variability in the estimates of the steady state probabilities of the chain. A lower MCSE indicates that the chain is more precise and reliable. The r\_hat values are all close to 1, indicating that the chains have converged. 
 
 \begin{figure}[h]
 \centering
