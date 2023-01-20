@@ -28,9 +28,9 @@ The parameters of the network were estimated using the Adam optimizer and the EL
 \label{tab:vaeloss}
 \end{table}
 
-We see that the original VAE performs better than the convolutional VAE for the 2-dimensional latent space. The difference is not significant, but it is still interesting to note. One explanation for this would be that the original VAE can learn a simpler, more linear structure of the data when the latent dimensions are low. This structure is sufficient to capture the information in the MNIST dataset. However, as the latent dimensions rise, the initial VAE can find it harder to understand a more intricate, non-linear data structure.
+We see that the original VAE performs better than the convolutional VAE for the 2-dimensional latent space. The difference is not significant, but it is still interesting to note. One explanation for this would be that the original VAE can learn a simpler, more linear structure of the data when the latent dimensions are low. This structure is sufficient to capture the information in the MNIST dataset. However, as the latent dimensions rise, the initial VAE finds it harder to understand a more intricate, non-linear data structure.
 
-Contrarily, convolutional VAE can learn spatial hierarchies in the data and is meant to handle high-dimensional data, such as images. As a result, it can still function more effectively when the latent dimensions are larger. Hence, the convolutional VAE performs better than the original VAE for all other latent dimensions (4, 8, 16, 32).
+Contrarily, convolutional VAEs can learn spatial hierarchies in the data and is meant to handle high-dimensional data, such as images. As a result, it can still function more effectively when the latent dimensions are larger. Hence, the convolutional VAE performs better than the original VAE for all other latent dimensions (4, 8, 16, 32).
 
 The difference between 16 and 32 latent dimensions for each of the models among themselves is minimal, hence why we do not show results for 32 latent dimensions in the graph. Surprisingly, we did not see a significant improvement from 16 to 32 latent dimensions in the convolutional VAE. We think this is because the convolutional VAE is not large enough to capture the information in the data. The convolutional VAE is a relatively small network, and it is possible that it is not able to learn the complex structure of the data with 32 latent dimensions.
 
@@ -41,7 +41,7 @@ We can also compare the performance of the original VAE and convolutional VAE by
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=11cm]{images/reconstructions.png}
+    \includegraphics[width=10cm]{images/reconstructions.png}
     \caption{Reconstructions of the original VAE and convolutional VAE. Latent dimensions = 16.}
     \label{fig:reconstructions}
 \end{figure}
