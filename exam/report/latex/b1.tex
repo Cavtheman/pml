@@ -8,7 +8,7 @@ All code for this task and the next is contained in the \texttt{function\_fittin
 \label{fig:p_theta}
 \end{figure}
 
-We used Arviz to gauge the quality of our samples, which gave us the plots that can be seen in Figure \ref{fig:arviz_old}. It also told us that our effective bulk sample size is $249$ and $287$ for the \texttt{lengthscale} and \texttt{variance} parameters, respectively. With such few points in the dataset, having half of the samples be good seems to indicate a relatively high quality. However, the quality of the approximation is obviously not very good, as the number of points is not large enough to sufficiently capture the entire signal of the function. Any human asked to approximate the function given only the five points in $\mathcal{D}$ would come up with something very similar to what we find in our plot of $p(f^*|x^*,\mathcal{D})$ in Figure \ref{fig:f_star}.
+We used Arviz to gauge the quality of our samples, which gave us the plots that can be seen in Figure \ref{fig:arviz_old}, and the tables seen in Table \ref{tab:arviz_new}. However, the quality of the approximation is obviously not very good, as the number of points is not large enough to sufficiently capture the entire signal of the function. This is to be expected however, given the low amount of data points. Any human asked to approximate the function given only the five points in $\mathcal{D}$ would come up with something very similar to what we find in our plot of $p(f^*|x^*,\mathcal{D})$ in Figure \ref{fig:f_star}.
 
 \begin{figure}[h]
 \centering
@@ -56,7 +56,7 @@ target\_accept\_prob & mcse\_mean & mcse\_sd & ess\_bulk & ess\_tail & r\_hat \\
 \label{tab:arviz_new}
 \end{table}
 
-We did not see huge difference when adjusting the nunber of warmup samples, but we did see a slight improvement when increasing the target acceptance probability. The results of this can be seen in Table \ref{tab:arviz_new}. The effective bulk sample size and effective tail sample size increased along with the target acceptance probability. The Markov Chain Monte Carlo Standard Error (MCSE) also decreased, which is a good sign. MCSE refers to the variability in the estimates of the steady state probabilities of the chain. A lower MCSE indicates that the chain is more precise and reliable. The r\_hat values are all close to 1, indicating that the chains have converged. 
+We did not see huge difference when adjusting the number of warmup samples, but we did see a slight improvement when increasing the target acceptance probability. The results of this can be seen in Table \ref{tab:arviz_new}. The effective bulk sample size and effective tail sample size increased along with the target acceptance probability. The Markov Chain Monte Carlo Standard Error (MCSE) also decreased, which is a good sign. MCSE refers to the variability in the estimates of the steady state probabilities of the chain. A lower MCSE indicates that the chain is more precise and reliable. The r\_hat values are all close to 1, indicating that the chains have converged. In the end, we ended up using $100$ warmup samples, and a target acceptance probability of $0.9$. These parameters lead to slightly longer training times, but we have decent compute power, so we decided it was worth it.
 
 \begin{figure}[h]
 \centering
