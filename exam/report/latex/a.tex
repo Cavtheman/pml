@@ -5,9 +5,10 @@ The decoder portion of the network takes in the latent space and passes it throu
 
 The parameters of the network were estimated using the Adam optimizer and the ELBO loss. ELBO is the sum of two terms: the reconstruction loss (BCE) and the KL divergence. By minimizing this loss, the VAE can learn a good approximation of the true posterior and generate realistic samples from the learned latent space. Both models were trained for 100 epochs with a batch size of 128. The models were trained with a learning rate of 0.0005 and a weight decay of 0. We trained both models on the MNIST dataset with a varying number of latent dimensions. The results are shown in Figure~\ref{fig:vaeloss}.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{images/test_loss.png}
+\setlength{\belowcaptionskip}{-10pt}
 \caption{ELBO reconstruction loss on test set for VAE and Convolutional VAE with varying number of latent dimensions.}
 \label{fig:vaeloss}
 \end{figure}
@@ -24,6 +25,7 @@ The parameters of the network were estimated using the Adam optimizer and the EL
 \multicolumn{1}{|c|}{32} & \multicolumn{1}{c|}{99.136} & \multicolumn{1}{c|}{94.434}  \\ \hline
 \end{tabular}
 \vspace*{0.5cm}
+\setlength{\belowcaptionskip}{-10pt}
 \caption{ELBO reconstruction loss on test set for VAE and Convolutional VAE with varying number of latent dimensions.}
 \label{tab:vaeloss}
 \end{table}
@@ -34,14 +36,15 @@ Contrarily, convolutional VAE can learn spatial hierarchies in the data and is m
 
 The difference between 16 and 32 latent dimensions for each of the models among themselves is minimal, hence why we do not show results for 32 latent dimensions in the graph. Surprisingly, we did not see a significant improvement from 16 to 32 latent dimensions in the convolutional VAE. We think this is because the convolutional VAE is not large enough to capture the information in the data. The convolutional VAE is a relatively small network, and it is possible that it is not able to learn the complex structure of the data with 32 latent dimensions.
 
-We are confident that a convolutional VAE could perform better than the original VAE when the latent dimensions are two if we adjust the network's capacity and use techniques such as batch normalization and dropout. If we increase the network size, we also expect that the convolutional VAE will have a more significant difference in performance between 16 and 32 latent dimensions. 
+We are confident that a convolutional VAE could perform better than the original VAE when the latent dimensions are two if we adjust the network's capacity and use techniques such as batch normalization and dropout. If we increase the network size, we also expect that the convolutional VAE will have a more significant difference in performance between 16 and 32 latent dimensions.
 
 We can also compare the performance of the original VAE and convolutional VAE by looking at the reconstructions visualized in Figure~\ref{fig:reconstructions}. We use the models trained with 16 latent dimensions to generate the reconstructions. We see that the original VAE can reconstruct the images reasonably well, but the convolutional VAE can reconstruct the images more accurately.
 
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=11cm]{images/reconstructions.png}
+    \setlength{\belowcaptionskip}{-10pt}
     \caption{Reconstructions of the original VAE and convolutional VAE. Latent dimensions = 16.}
     \label{fig:reconstructions}
 \end{figure}
@@ -50,7 +53,7 @@ We can also compare the performance of the original VAE and convolutional VAE by
 
 We have implemented a Diffusion model to generate images from the MNIST dataset. The model is based on the paper \cite{diffusion} and is a generative model that uses a diffusion process to generate images. Diffusion models are a class of generative models that have recently established themselves as state-of-the-art in image generation with popular models such as DALL-E-2, stable diffusion, and midjourney.
 
-Diffusion models define a markov chain of diffusion steps, where at each step we add random noise to the image and the learn the reverse process. Therefore, they are able to model complex distributions of images and have proven to be very effective in generating realistic images. 
+Diffusion models define a markov chain of diffusion steps, where at each step we add random noise to the image and the learn the reverse process. Therefore, they are able to model complex distributions of images and have proven to be very effective in generating realistic images.
 
 However, one disadvantage of diffusion models is that they can be more difficult to implement, train, and optimize as opposed to other models such as VAEs. This is because they are based on a continuous-time stochastic process, and the optimization of the model is not as straightforward as it is for VAEs. Training a diffusion model can also be computationally expensive, and it can take a long time to train it to generate high-quality images.
 
@@ -69,10 +72,11 @@ where $\mathbf{x}_t$ is the image at time $t$ and $\mathbf{x}_{t-1}$ is the imag
 
 Here we have that $\theta$ is the parameters we train. We use a simple Unet to trainrepresent the reverse process and we use the ELBO loss function to train the model. The represent time, we use the  Transformer sinusoidal position embedding as described in the paper \cite{diffusion}. However, we apply no self-attention. Our Unet is very simple and will very likely not be able to compete with the more complex Unets used in the paper \cite{diffusion}. We tried using a simpler arcitecture, but the results were not nearly as good. We use the Adam optimizer with a learning rate of $10^{-4}$ and a batch size of 128. We train the model for 100 epochs.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \subfloat[\centering Diffusion]{{\includegraphics[width=6.5cm]{images/diffusion.png} }}%
     \subfloat[\centering Original VAE]{{\includegraphics[width=6.5cm]{images/vae_sample.png} }}%
+    \setlength{\belowcaptionskip}{-10pt}
     \caption{Comparison of generated images from the diffusion model and the original VAE.}
     \label{fig:example}%
 \end{figure}
